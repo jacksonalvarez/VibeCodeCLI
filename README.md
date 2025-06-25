@@ -1,52 +1,40 @@
-# AI CLI App
+# AI-CLI APP
 
-A terminal-based AI assistant for writing, compiling, and executing code across multiple languages — directly from your terminal using a rich Textual UI.
-
----
-
-## 🧠 Features
-
-- Terminal UI with input fields, logs, buttons, and more (via [textual](https://github.com/Textualize/textual))
-- OpenAI-powered code assistant
-- Supports code generation and execution for many languages
-- Handles compilation and runtime execution
-- Multithreading and subprocess support
-- Rich logging and formatting via `rich`
+A smart, terminal-based AI assistant that helps you write, compile, and run code in many programming languages — all from your command line with a sleek and interactive interface.
 
 ---
 
-## 📦 Requirements
+## What It Does
 
-### Python Version
+- Provides a rich, user-friendly terminal UI powered by [Textual](https://github.com/Textualize/textual)
+- Uses OpenAI’s API to assist with coding tasks
+- Supports writing, compiling, and running code in multiple languages
+- Shows logs and feedback in real-time for smooth workflows
+- Handles multi-threading and subprocesses behind the scenes
+- Makes working with code from the terminal fun and productive
 
-- **Python 3.9+** is required.
+---
 
-### Python Dependencies
+## Getting Started
 
-Install with:
+### What You Need
+
+- Python 3.9 or newer
+- The following Python libraries (install with pip):
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Or manually:
+Or install manually:
 
 ```bash
 pip install textual rich openai python-dotenv
 ```
 
-#### Required Packages
+### Your OpenAI API Key
 
-- [textual](https://pypi.org/project/textual/)
-- [rich](https://pypi.org/project/rich/)
-- [openai](https://pypi.org/project/openai/)
-- [python-dotenv](https://pypi.org/project/python-dotenv/)
-
----
-
-## 🔐 Environment Variables
-
-Create a `.env` file in the root directory with your OpenAI API key:
+To connect to OpenAI’s service, create a `.env` file in the project folder with this line:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
@@ -54,9 +42,9 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ---
 
-## 🖥️ Supported Languages
+## Supported Languages
 
-This app supports the following file types and languages:
+This app supports working with code files in these languages:
 
 | Extension | Language            |
 |-----------|---------------------|
@@ -80,37 +68,38 @@ This app supports the following file types and languages:
 | `.yml`    | YAML                |
 | `.yaml`   | YAML                |
 
-> ⚠️ **Bring your own compiler**:  
-> For compiled or interpreted languages (like C, Java, TypeScript, Go, etc.), you **must have the necessary compiler or runtime installed** on your system.  
-> This app does not include or install them for you.
+**Important:**  
+For languages that require compiling or a runtime (like Java, C++, Go, etc.), please make sure you have the necessary tools installed on your computer. This app doesn’t install them for you — it just helps you use what you already have.
 
 ---
 
-## 🚀 Running the App
+## How To Run
 
-Once dependencies are installed and your `.env` file is set up, run:
+Once everything is set up, just run:
 
 ```bash
 python app.py
 ```
 
+and start coding smarter from your terminal.
+
 ---
 
-## 📁 Project Structure
+## Project Files Overview
 
 ```
 .
-├── app.py                # Main Textual application
-├── agent.py              # AI agent logic
-├── llm_utils.py          # LLM helper utilities
-├── .env                  # API key config
-├── requirements.txt      # Python dependencies
-└── README.md             # This file
+├── app.py                # The main app UI and logic
+├── agent.py              # AI coding assistant backend
+├── llm_utils.py          # Helper utilities for language model interaction
+├── .env                  # Your OpenAI API key (not included)
+├── requirements.txt      # Python dependencies list
+└── README.md             # This guide
 ```
 
 ---
 
-## 📄 requirements.txt
+## Dependencies (`requirements.txt`)
 
 ```txt
 textual>=0.54.1
@@ -121,6 +110,6 @@ python-dotenv>=1.0.0
 
 ---
 
-## 🪪 License
+## License
 
-MIT License (or insert your preferred license here)
+MIT License — free to use and modify!
