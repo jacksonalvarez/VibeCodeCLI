@@ -1,6 +1,6 @@
 # AI COMMAND LINE APP
 
-![AI CLI Demo](https://github.com/user-attachments/assets/660e6b9d-22c6-4413-823d-1c75c030cbae)
+![AI CLI Demo]
 
 A smart, terminal-based AI assistant that helps you write, compile, and run code in many programming languages — all from your command line with a sleek and interactive interface.
 
