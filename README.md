@@ -1,26 +1,28 @@
 # AI COMMAND LINE APP
 
+![AI CLI Demo](https://github.com/user-attachments/assets/660e6b9d-22c6-4413-823d-1c75c030cbae)
+
 A smart, terminal-based AI assistant that helps you write, compile, and run code in many programming languages — all from your command line with a sleek and interactive interface.
 
 ---
 
 ## What It Does
 
-- Provides a rich, user-friendly terminal UI powered by [Textual](https://github.com/Textualize/textual)
-- Uses OpenAI’s API to assist with coding tasks
-- Supports writing, compiling, and running code in multiple languages
-- Shows logs and feedback in real-time for smooth workflows
-- Handles multi-threading and subprocesses behind the scenes
-- Makes working with code from the terminal fun and productive
+- Rich, responsive terminal UI powered by [Textual](https://github.com/Textualize/textual)
+- Uses OpenAI’s API to help you write and improve code
+- Supports compiling and running multiple languages
+- Real-time feedback and logs
+- Handles threading, subprocesses, and runtime quirks
+- Makes terminal coding faster and more intuitive
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### What You Need
 
 - Python 3.9 or newer
-- The following Python libraries (install with pip):
+- Required libraries:
 
 ```bash
 pip install -r requirements.txt
@@ -32,9 +34,9 @@ Or install manually:
 pip install textual rich openai python-dotenv
 ```
 
-### Your OpenAI API Key
+### API Key Setup
 
-To connect to OpenAI’s service, create a `.env` file in the project folder with this line:
+Create a `.env` file in your project folder:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
@@ -44,7 +46,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ## Supported Languages
 
-This app supports working with code files in these languages:
+This app supports a wide variety of file types and languages:
 
 | Extension | Language            |
 |-----------|---------------------|
@@ -68,48 +70,42 @@ This app supports working with code files in these languages:
 | `.yml`    | YAML                |
 | `.yaml`   | YAML                |
 
-**Important:**  
-For languages that require compiling or a runtime (like Java, C++, Go, etc.), please make sure you have the necessary tools installed on your computer. This app doesn’t install them for you — it just helps you use what you already have.
+> ⚠️ **Heads up:** If you plan to run code in compiled languages (like Java, C++, Rust, etc.), you’ll need to have those compilers/runtimes installed yourself. This app helps you use them — it doesn’t install them for you.
 
 ---
 
-## How To Run
+## How to Run It
 
-Once everything is set up, just run:
+From the root directory, launch the app with:
 
 ```bash
 python app.py
 ```
 
-and start coding smarter from your terminal.
+Enjoy the magic. 
 
 ---
 
-## Project Files Overview
-
-```
-.
-├── app.py                # The main app UI and logic
-├── agent.py              # AI coding assistant backend
-├── llm_utils.py          # Helper utilities for language model interaction
-├── .env                  # Your OpenAI API key (not included)
-├── requirements.txt      # Python dependencies list
-└── README.md             # This guide
-```
-
----
-
-## Dependencies (`requirements.txt`)
+##  requirements.txt
 
 ```txt
-textual>=0.54.1
-rich>=13.7.0
-openai>=1.3.7
-python-dotenv>=1.0.0
+textual
+rich
+openai
+python-dotenv
 ```
 
 ---
 
-## License
+## 💖 Leave a Tip
 
-MIT License — free to use and modify!
+Support a broke solo developer ;D
+[![[Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/pool/9g1cB8WseO?sr=wccr](https://www.paypal.com/donate/?business=AS3PVPZSJHS84&no_recurring=0&item_name=Support+a+solo+guy+who+makes+free+accessible+tools+for+everyone.+Even+1%24+helps%21&currency_code=USD))
+
+Or just send a thank-you — that works too. 🙏
+
+---
+
+## 📜 License
+
+MIT License — free to use, share, and modify. Happy coding!
