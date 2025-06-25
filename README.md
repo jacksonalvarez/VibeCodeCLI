@@ -100,7 +100,7 @@ python-dotenv
 ## 💖 Leave a Tip
 
 Support a broke solo developer ;D
-[![[Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/pool/9g1cB8WseO?sr=wccr](https://www.paypal.com/donate/?business=AS3PVPZSJHS84&no_recurring=0&item_name=Support+a+solo+guy+who+makes+free+accessible+tools+for+everyone.+Even+1%24+helps%21&currency_code=USD))]
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate/?business=AS3PVPZSJHS84&no_recurring=0&item_name=Support+a+solo+guy+who+makes+free+accessible+tools+for+everyone.+Even+1%24+helps%21&currency_code=USD)
 
 Or just send a thank-you — that works too. 🙏
 
