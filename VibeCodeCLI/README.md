@@ -1,352 +1,327 @@
-# AI Coding Agent - Development Guide
+# VibeCodeCLI
 
-## Project Structure for AI Development
+## Overview
 
-This project is structured to support scalable AI development with modular
-features, comprehensive monitoring, and robust configuration management.
+VibeCodeCLI is an AI-assisted coding agent designed to streamline software
+development tasks. It leverages advanced language models to generate, debug, and
+refine code projects based on user feedback. The project integrates a
+Textual-based UI for seamless interaction and monitoring.
 
-### Architecture Overview
+## Features
+
+- **AI-Powered Code Generation**: Generate complete project structures and files
+  using advanced LLMs.
+- **Feedback Integration**: Process user feedback to iteratively improve project
+  files.
+- **Textual UI**: Interactive and user-friendly interface for managing projects
+  and chat history.
+- **Monitoring**: Integrated monitoring classes for tracking operations and
+  debugging.
+- **Multi-threading**: Efficient parallel processing for feedback and file
+  operations.
+
+## Project Structure
 
 ```
-ai-coding-agent/
-├── core/                    # Core agent functionality
-├── ui/                      # User interface components  
-├── features/                # Modular AI features
-├── config/                  # Configuration management
-├── scripts/                 # Development utilities
-├── tests/                   # Test suite
-└── docs/                    # Documentation
+C:/
+│   LICENSE
+│   README.md
+│
+├───ai_projects
+│       projects_will_be_here.txt
+│
+└───VibeCodeCLI
+    │   agent.py
+    │   api_monitoring.db
+    │   debug_global_monitoring.py
+    │   llm_utils.py
+    │   master_monitoring.py
+    │   prompter.txt
+    │   README.md
+    │   simple_analyzer.py
+    │   test_monitoring_data.py
+    │   textual_agent.py
+    │   ui_utils.py
+    │
+    ├───config
+    │   │   models.yaml
+    │   │   settings.yaml
+    │   │   __init__.py
+    │   │
+    │   ├───prompts
+    │
+    ├───core
+    │   │   __init__.py
+    │   │
+    │   ├───language
+    │   │       __init__.py
+    │   │
+    │   └───monitoring
+    │           __init__.py
+    │
+    ├───data
+    │   ├───cache
+    │   ├───examples
+    │   └───templates
+    ├───docs
+    │   ├───api
+    │   ├───development
+    │   └───user_guide
+    ├───features
+    │   │   __init__.py
+    │   │
+    │   ├───code_analysis
+    │   │       __init__.py
+    │   │
+    │   ├───code_generation
+    │   │       __init__.py
+    │   │
+    │   ├───integrations
+    │   │       __init__.py
+    │   │
+    │   └───project_templates
+    │           __init__.py
+    │
+    ├───language
+    │   │   base.py
+    │   │   c.py
+    │   │   cpp.py
+    │   │   cs.py
+    │   │   css.py
+    │   │   go.py
+    │   │   html.py
+    │   │   java.py
+    │   │   javascript.py
+    │   │   json.py
+    │   │   md.py
+    │   │   php.py
+    │   │   python.py
+    │   │   rb.py
+    │   │   rs.py
+    │   │   text.py
+    │   │   typescript.py
+    │   │   yaml.py
+    │   │   __init__.py
+    │   │
+    │
+    ├───requirements
+    │       base.txt
+    │       dev.txt
+    │
+    ├───scripts
+    │       setup_dev.py
+    │       __init__.py
+    │
+    ├───tests
+    │   │   __init__.py
+    │   │
+    │   ├───fixtures
+    │   │       __init__.py
+    │   │
+    │   ├───integration
+    │   │       __init__.py
+    │   │
+    │   └───unit
+    │           __init__.py
+    │
+    ├───ui
+    │   │   __init__.py
+    │   │
+    │   ├───components
+    │   │       __init__.py
+    │   │
+    │   └───themes
+    │           __init__.py
 ```
 
-## Getting Started
+## Installation
 
-### 1. Development Setup
-
-Run the development setup script:
-
-```bash
-python scripts/setup_dev.py
-```
-
-This will:
-
-- Create the project structure
-- Set up virtual environment
-- Install dependencies
-- Create configuration files
-- Set up pre-commit hooks
-
-### 2. Configuration
-
-1. Copy `.env.example` to `.env`
-2. Add your API keys:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/VibeCodeCLI.git
+   cd VibeCodeCLI
    ```
-   LLM_API_KEY=your_api_key_here
-   OPENAI_API_KEY=your_openai_key_here
-   ANTHROPIC_API_KEY=your_anthropic_key_here
+
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On Windows: venv\Scripts\activate
    ```
 
-### 3. Running the Application
-
-```bash
-# Activate virtual environment
-source venv/bin/activate  # Linux/Mac
-# or
-venv\Scripts\activate     # Windows
-
-# Run the textual agent
-python ui/textual_agent.py
-```
-
-## Feature Development
-
-### Creating a New Feature
-
-1. Create a new file in `features/your_feature/`
-2. Inherit from `BaseFeature`:
-
-```python
-from features import BaseFeature
-
-class YourFeature(BaseFeature):
-    def __init__(self):
-        super().__init__("your_feature", "1.0.0")
-    
-    async def initialize(self, agent_context):
-        # Initialize your feature
-        return True
-    
-    async def execute(self, request):
-        # Feature implementation
-        return {"result": "success"}
-    
-    def get_capabilities(self):
-        return ["capability1", "capability2"]
-```
-
-3. Register the feature:
-
-```python
-from features import feature_manager
-from your_feature import YourFeature
-
-feature_manager.register_feature(YourFeature())
-```
-
-### Available Features
-
-#### Code Analysis Feature
-
-- **Location**: `features/code_analysis/`
-- **Capabilities**:
-  - Dependency analysis
-  - Complexity metrics
-  - Security scanning
-  - Code quality assessment
-
-**Usage**:
-
-```python
-result = await feature_manager.execute_feature("code_analysis", {
-    "type": "all",  # or "dependencies", "complexity", "security", "quality"
-    "files": project_files,
-    "project_path": "/path/to/project"
-})
-```
-
-## Configuration Management
-
-The `config` module provides centralized configuration:
-
-```python
-from config import config_manager
-
-# Get model configuration
-model_config = config_manager.get_model_config("gpt-4")
-
-# Get application settings
-max_attempts = config_manager.get_setting("agent.max_attempts", 5)
-
-# Get API key
-api_key = config_manager.get_api_key("openai")
-```
-
-### Configuration Files
-
-- `config/models.yaml` - LLM model configurations
-- `config/features.yaml` - Feature settings
-- `config/settings.yaml` - Application settings
-- `config/prompts/` - Prompt templates
-
-## Testing
-
-Run tests with:
-
-```bash
-python scripts/run_tests.py
-```
-
-Or directly with pytest:
-
-```bash
-pytest tests/
-```
-
-## AI Development Workflow
-
-### 1. Feature-Driven Development
-
-Each AI capability should be implemented as a separate feature:
-
-- **Code Generation**: Template-based code generation
-- **Code Analysis**: Static analysis and metrics
-- **Refactoring**: Automated code improvements
-- **Testing**: Test generation and execution
-- **Documentation**: Auto-documentation generation
-
-### 2. Prompt Engineering
-
-Store prompts in `config/prompts/`:
-
-```yaml
-# config/prompts/code_generation.yaml
-prompts:
-    python_function:
-        system: "You are a Python code generator..."
-        user: "Generate a Python function that {description}"
-
-    javascript_component:
-        system: "You are a React component generator..."
-        user: "Create a React component for {component_type}"
-```
-
-### 3. Model Management
-
-Configure multiple models in `config/models.yaml`:
-
-```yaml
-models:
-    - name: gpt-4
-      provider: openai
-      model_id: gpt-4
-      max_tokens: 4096
-      cost_per_1k_input: 0.03
-      cost_per_1k_output: 0.06
-
-    - name: claude-3-haiku
-      provider: anthropic
-      model_id: claude-3-haiku-20240307
-      max_tokens: 4096
-      cost_per_1k_input: 0.00025
-      cost_per_1k_output: 0.00125
-```
-
-### 4. Monitoring and Analytics
-
-The monitoring system tracks:
-
-- API usage and costs
-- Feature performance
-- User interactions
-- Error rates
-
-Access monitoring data:
-
-```python
-from core.monitoring import MasterMonitoring
-
-monitor = MasterMonitoring()
-metrics = monitor.get_session_summary()
-```
-
-## Advanced Features
-
-### 1. Project Templates
-
-Create reusable project templates in `features/project_templates/`:
-
-```python
-class WebAppTemplate(BaseFeature):
-    def get_template_files(self):
-        return {
-            "app.py": "# Flask web application...",
-            "requirements.txt": "flask>=2.0.0...",
-            "static/style.css": "/* CSS styles */",
-            "templates/index.html": "<!-- HTML template -->"
-        }
-```
-
-### 2. External Integrations
-
-Integrate with external tools in `features/integrations/`:
-
-- Git operations
-- Docker containerization
-- CI/CD pipelines
-- Cloud deployments
-
-### 3. Code Quality Tools
-
-Automated integration with:
-
-- **flake8** - Style checking
-- **bandit** - Security analysis
-- **mypy** - Type checking
-- **black** - Code formatting
-
-## Best Practices
-
-### 1. Feature Design
-
-- Keep features focused and single-purpose
-- Use dependency injection for configuration
-- Implement proper error handling
-- Include comprehensive tests
-
-### 2. Configuration Management
-
-- Use environment variables for secrets
-- Store settings in YAML files
-- Provide sensible defaults
-- Document all configuration options
-
-### 3. Monitoring
-
-- Track all LLM API calls
-- Monitor feature usage
-- Log errors and performance metrics
-- Generate regular reports
-
-### 4. Testing
-
-- Write unit tests for all features
-- Include integration tests
-- Test with different models
-- Mock external dependencies
-
-## Debugging
-
-### Enable Debug Mode
-
-Set in `.env`:
-
-```
-DEBUG_MODE=true
-LOG_LEVEL=DEBUG
-```
-
-### Logging
-
-Features should use proper logging:
-
-```python
-import logging
-
-logger = logging.getLogger(__name__)
-
-class YourFeature(BaseFeature):
-    async def execute(self, request):
-        logger.info(f"Executing {self.name} with request: {request}")
-        try:
-            result = self.process(request)
-            logger.debug(f"Feature result: {result}")
-            return result
-        except Exception as e:
-            logger.error(f"Feature error: {e}")
-            raise
-```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Set up environment variables:
+   - Create a `.env` file in the root directory.
+   - Add your API key:
+     ```
+     OPENAI_API_KEY=your_openai_api_key
+     ```
+
+## Usage
+
+1. Run the Textual UI:
+   ```bash
+   python textual_agent.py
+   ```
+
+2. Interact with the coding agent:
+   - Provide a project description or feedback via the UI.
+   - View generated project structure and files.
+
+3. Monitor operations:
+   - Debug output and monitoring logs are displayed in the terminal.
+
+## How It Works
+
+- **Initialization**: The agent verifies API keys and sets up the environment.
+- **Project Creation**: Users provide a task prompt, and the agent generates a
+  project structure.
+- **Feedback Processing**: Users can provide feedback to refine the project
+  iteratively.
+- **Execution**: The agent writes files to disk and executes the main file to
+  validate functionality.
 
 ## Contributing
 
-1. Create a feature branch
-2. Implement your feature with tests
-3. Run the test suite
-4. Update documentation
-5. Submit a pull request
+Contributions are welcome! Please fork the repository and submit a pull request
+with your changes.
 
-## Roadmap
+## License
 
-### Planned Features
+This project is licensed under the MIT License. See the LICENSE file for
+details.
 
-1. **Advanced Code Analysis**
-   - AST-based refactoring
-   - Performance optimization suggestions
-   - Architecture analysis
+## Contact
 
-2. **Multi-Model Orchestration**
-   - Model routing based on task type
-   - Cost optimization
-   - Fallback strategies
+For questions or support, please contact alvarezjd404@gmail.com.
 
-3. **Collaborative Development**
-   - Multi-user support
-   - Shared projects
-   - Real-time collaboration
+## Architecture and File Justification
 
-4. **Cloud Integration**
-   - Remote execution
-   - Scalable infrastructure
-   - API endpoints
+### Root Directory
 
-This structure provides a solid foundation for AI-powered development tools
-while maintaining flexibility and extensibility.
+- **LICENSE**: Contains the licensing information for the project.
+- **README.md**: Documentation for the project, including installation, usage,
+  and architecture.
+
+### ai_projects
+
+- **projects_will_be_here.txt**: Placeholder file indicating where AI-generated
+  projects will be stored.
+
+### VibeCodeCLI
+
+#### Scripts
+
+- **agent.py**: Implements the `LLMCodingAgent` class, which handles project
+  creation, feedback processing, and file execution. It includes methods for API
+  key verification, feedback integration, and asynchronous operations.
+- **api_monitoring.db**: Database file for storing API monitoring data.
+- **debug_global_monitoring.py**: Script for debugging and tracking global
+  monitoring operations.
+- **llm_utils.py**: Utility functions for interacting with language models,
+  including `call_llm`, `write_files`, and `run_code`.
+- **master_monitoring.py**: Contains monitoring logic for tracking operations
+  and debugging. Includes classes like `FallbackMonitoring` and
+  `MonitoringIntegration`.
+- **prompter.txt**: Stores prompts used for feedback and project creation.
+- **README.md**: Project documentation.
+- **simple_analyzer.py**: Analyzes project structure and dependencies.
+- **test_monitoring_data.py**: Placeholder script for testing monitoring data.
+- **textual_agent.py**: Implements the Textual-based UI for interacting with the
+  coding agent. Includes features like scrollable panels, text wrapping, and
+  ASCII project structure display.
+- **ui_utils.py**: Utility functions for UI components.
+
+#### Folders
+
+##### config
+
+- **models.yaml**: Configuration for AI models.
+- **settings.yaml**: General settings for the project.
+- ****init**.py**: Initializes the `config` module.
+- **prompts/**: Contains prompt templates for various tasks.
+
+##### core
+
+- ****init**.py**: Initializes the `core` module.
+- **language/**: Contains language-specific utilities.
+  - ****init**.py**: Initializes the `language` module.
+- **monitoring/**: Contains monitoring-related utilities.
+  - ****init**.py**: Initializes the `monitoring` module.
+
+##### data
+
+- **cache/**: Stores cached data.
+- **examples/**: Contains example data files.
+- **templates/**: Stores templates for project generation.
+
+##### docs
+
+- **api/**: API documentation.
+- **development/**: Development guidelines.
+- **user_guide/**: User guide documentation.
+
+##### features
+
+- ****init**.py**: Initializes the `features` module.
+- **code_analysis/**: Contains scripts for analyzing code.
+  - ****init**.py**: Initializes the `code_analysis` module.
+- **code_generation/**: Contains scripts for generating code.
+  - ****init**.py**: Initializes the `code_generation` module.
+- **integrations/**: Contains integration-related scripts.
+  - ****init**.py**: Initializes the `integrations` module.
+- **project_templates/**: Contains templates for project creation.
+  - ****init**.py**: Initializes the `project_templates` module.
+
+##### language
+
+- **base.py**: Base class for language-specific utilities.
+- **c.py**: Utilities for C programming.
+- **cpp.py**: Utilities for C++ programming.
+- **cs.py**: Utilities for C# programming.
+- **css.py**: Utilities for CSS.
+- **go.py**: Utilities for Go programming.
+- **html.py**: Utilities for HTML.
+- **java.py**: Utilities for Java programming.
+- **javascript.py**: Utilities for JavaScript.
+- **json.py**: Utilities for JSON.
+- **md.py**: Utilities for Markdown.
+- **php.py**: Utilities for PHP.
+- **python.py**: Utilities for Python programming.
+- **rb.py**: Utilities for Ruby programming.
+- **rs.py**: Utilities for Rust programming.
+- **text.py**: Utilities for plain text.
+- **typescript.py**: Utilities for TypeScript.
+- **yaml.py**: Utilities for YAML.
+- ****init**.py**: Initializes the `language` module.
+
+##### requirements
+
+- **base.txt**: Base requirements for the project.
+- **dev.txt**: Development requirements.
+
+##### scripts
+
+- **setup_dev.py**: Script for setting up the development environment.
+- ****init**.py**: Initializes the `scripts` module.
+
+##### tests
+
+- ****init**.py**: Initializes the `tests` module.
+- **fixtures/**: Contains test fixtures.
+  - ****init**.py**: Initializes the `fixtures` module.
+- **integration/**: Contains integration tests.
+  - ****init**.py**: Initializes the `integration` module.
+- **unit/**: Contains unit tests.
+  - ****init**.py**: Initializes the `unit` module.
+
+##### ui
+
+- ****init**.py**: Initializes the `ui` module.
+- **components/**: Contains UI components.
+  - ****init**.py**: Initializes the `components` module.
+- **themes/**: Contains UI themes.
+  - ****init**.py**: Initializes the `themes` module.
