@@ -1,0 +1,28 @@
+# Optional Development requirements for AI Coding Agent
+-r base.txt
+
+# Testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
+
+# Code quality
+black>=22.0.0
+flake8>=5.0.0
+mypy>=1.0.0
+isort>=5.0.0
+
+# Security
+bandit>=1.7.0
+
+# Pre-commit hooks
+pre-commit>=3.0.0
+
+# Documentation
+sphinx>=5.0.0
+sphinx-rtd-theme>=1.2.0
+myst-parser>=0.18.0
+
+# Development tools
+ipython>=8.0.0
+jupyter>=1.0.0

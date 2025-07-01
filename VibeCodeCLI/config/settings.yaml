@@ -1,0 +1,14 @@
+agent:
+  auto_save_projects: true
+  default_model: gpt-3.5-turbo
+  enable_monitoring: true
+  max_attempts: 5
+  max_json_retries: 3
+development:
+  debug_mode: false
+  enable_experimental_features: false
+  log_level: INFO
+ui:
+  auto_refresh_monitoring: true
+  monitoring_refresh_interval: 5
+  theme: default
